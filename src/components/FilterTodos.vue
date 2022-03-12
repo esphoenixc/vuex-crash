@@ -1,7 +1,7 @@
 <template>
   <div>
     Filter Todos:
-    <select @change="filterTodos($event)">
+    <select @change="onChange" v-model="limit">
       <option value="200">200</option>
       <option value="100">100</option>
       <option value="50">50</option>
@@ -18,7 +18,20 @@ import { mapActions } from "vuex";
 export default {
   name: "FilterTodos",
 
-  methods: mapActions(["filterTodos"]),
+  data() {
+    return {
+      limit: 0,
+    };
+  },
+
+  methods: {
+    ...mapActions(["filterTodos"]),
+
+    onChange() {
+      this.filterTodos(this.limit);
+      console.log(this.limit);
+    },
+  },
 };
 </script>
 
